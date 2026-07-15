@@ -10,3 +10,17 @@ yossi = UserProfile("yossi")
 print(yossi.username)
 # print(yossi.__username)
 # AttributeError: Python does not recognize this variable.
+# step 2 - Private Email with Getter
+class UserProfile:
+    def __init__(self, username, email):
+        self.__username = username
+        self.__email = email
+    @property
+    def username(self):
+        return self.__username
+    @property
+    def email(self):
+        return self.__email
+bob = UserProfile("bob", "bob@mail.com")
+print(bob.username)
+print(bob.email)
