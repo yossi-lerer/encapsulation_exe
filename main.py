@@ -111,3 +111,30 @@ class UserAccount:
 admin = UserAccount("admin", "secret")
 print(admin.check_password("wrong"))
 admin.change_password("secre", "new123")
+# step 8 - Post Like Counter
+class Post:
+    def __init__(self, author, content):
+        self.author = author
+        self.content = content
+        self.__likes = 0
+        self.__liked_by = []
+    @property
+    def likes(self):
+        return self.__likes
+    def like(self, username):
+        if not username in self.__liked_by:
+            self.__liked_by.append(username)
+            self.__likes += 1
+    def unlike(self, username):
+        if username in self.__liked_by:
+            self.__liked_by.remove(username)
+            self.__likes -= 1
+    def status(self):
+        print(f"Post by {self.author}: {self.__likes} likes")
+alice  = Post("alice", "Hello world!")
+alice.like("yossi")
+alice.like("mosh")
+alice.like("yani")
+alice.like("yani")
+alice.unlike("yani")
+alice.status()
