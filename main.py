@@ -24,3 +24,21 @@ class UserProfile:
 bob = UserProfile("bob", "bob@mail.com")
 print(bob.username)
 print(bob.email)
+# step 3 - Username Setter with Validation
+class UserProfile:
+    def __init__(self, username):
+        self.__username = username
+    @property
+    def username(self):
+        return self.__username
+    @username.setter
+    def username(self, username):
+        if len(username) >= 3:
+            self.__username = username
+        else:
+            print("username too short")
+yossi = UserProfile("yossi")
+yossi.username = "yo"
+print(yossi.__dict__)
+yossi.username = "yosss"
+print(yossi.__dict__)
