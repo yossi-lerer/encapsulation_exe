@@ -76,3 +76,23 @@ class VerifiedUser(UserProfile):
         print(f"{self.username} [{self.badge}]: {self._bio}")
 celeb = VerifiedUser("celeb", "Singer and songwriter", "✓")
 celeb.full_description()
+# step 6 - Age Setter with Range Check
+class UserProfile:
+    def __init__(self, username, age):
+        self.username = username
+        self.__age = age
+    @property
+    def age(self):
+        return self.__age
+    @age.setter
+    def age(self, age):
+        if 13 <= age <= 120:
+            self.__age = age
+        else:
+            print("Invalid age.")
+dan = UserProfile("dan", 18)
+print(dan.__dict__)
+dan.age = 10
+dan.age = 200
+dan.age = 25
+print(dan.__dict__)
