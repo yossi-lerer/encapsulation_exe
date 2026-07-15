@@ -96,3 +96,18 @@ dan.age = 10
 dan.age = 200
 dan.age = 25
 print(dan.__dict__)
+# step 7 - Password Protection
+class UserAccount:
+    def __init__(self, username, password):
+        self.username = username
+        self.__password = password
+    def check_password(self, attempt):
+        return True if attempt == self.__password else False
+    def change_password(self, old, new):
+        if self.__password == old:
+            self.__password = new
+        else:
+            print("Incorrect old password.")
+admin = UserAccount("admin", "secret")
+print(admin.check_password("wrong"))
+admin.change_password("secre", "new123")
