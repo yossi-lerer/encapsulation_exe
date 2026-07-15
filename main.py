@@ -179,3 +179,54 @@ yossi = UserProfile("yossi")
 yossi.show_email = True
 yossi.is_public = "yes"
 yossi.privacy_summary()
+# step 10 - Full User Account System
+class UserAccount:
+    def __init__(self, username, email, password, age):
+        self.__username = username
+        self.__email = email
+        self.__password = password
+        self.__age = age
+        self._login_count = 0
+    @property
+    def username(self):
+        return self.__username
+    @username.setter
+    def username(self, new_user):
+        if new_user >= 3:
+            self.__username = new_user
+
+    @property
+    def email(self):
+        return self.__email
+    @email.setter
+    def email(self, new_email):
+        if "@" in new_email:
+            self.__email = new_email
+    @property
+    def age(self):
+        return self.__age
+    @age.setter
+    def age(self, new_age):
+        if 13 <= new_age <= 120:
+            self.__age = new_age
+    def check_password(self, attempt):
+        return True if attempt == self.__password else False
+    def change_password(self, old, new):
+        if self.__password == old:
+            self.__password = new
+        else:
+            print("Incorrect old password.")
+    def login(self, password):
+        if password == self.__password:
+            self._login_count += 1
+        else:
+            print("Login failed.")
+    def account_summary(self):
+        print(f"username: {self.__username}, email: {self.__email}, age: {self.__age}, login count: {self._login_count}")
+yossi = UserAccount("yossi", "yossi@gmail.com", 45485, 22)
+yossi.login(546)
+yossi.login(54665431)
+yossi.login(45485)
+yossi.email = "yossi@gg"
+yossi.age = 30
+yossi.account_summary()
