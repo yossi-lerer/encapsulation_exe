@@ -60,3 +60,19 @@ yossi.follow()
 yossi.follow()
 yossi.unfollow()
 print(yossi.followers)
+# step 5 - Protected Bio Field
+class UserProfile:
+    def __init__(self, username, bio):
+        self.username = username
+        self._bio = bio
+    @property
+    def bio(self):
+        return self._bio
+class VerifiedUser(UserProfile):
+    def __init__(self, username, bio, badge):
+        super().__init__(username, bio)
+        self.badge = badge
+    def full_description(self):
+        print(f"{self.username} [{self.badge}]: {self._bio}")
+celeb = VerifiedUser("celeb", "Singer and songwriter", "✓")
+celeb.full_description()
