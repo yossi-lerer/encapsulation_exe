@@ -42,3 +42,21 @@ yossi.username = "yo"
 print(yossi.__dict__)
 yossi.username = "yosss"
 print(yossi.__dict__)
+# step 4 - Private Follower Count
+class UserProfile:
+    def __init__(self, username):
+        self.username = username
+        self.__followers = 0
+    @property
+    def followers(self):
+        return self.__followers
+    def follow(self):
+        self.__followers += 1
+    def unfollow(self):
+        self.__followers -= 1
+yossi = UserProfile("yossi")
+yossi.follow()
+yossi.follow()
+yossi.follow()
+yossi.unfollow()
+print(yossi.followers)
