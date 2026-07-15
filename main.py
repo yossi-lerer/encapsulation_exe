@@ -1,0 +1,232 @@
+# part 1
+# step 1 - Private Username
+class UserProfile:
+    def __init__(self, username):
+        self.__username = username
+    @property
+    def username(self):
+        return self.__username
+yossi = UserProfile("yossi")
+print(yossi.username)
+# print(yossi.__username)
+# AttributeError: Python does not recognize this variable.
+# step 2 - Private Email with Getter
+class UserProfile:
+    def __init__(self, username, email):
+        self.__username = username
+        self.__email = email
+    @property
+    def username(self):
+        return self.__username
+    @property
+    def email(self):
+        return self.__email
+bob = UserProfile("bob", "bob@mail.com")
+print(bob.username)
+print(bob.email)
+# step 3 - Username Setter with Validation
+class UserProfile:
+    def __init__(self, username):
+        self.__username = username
+    @property
+    def username(self):
+        return self.__username
+    @username.setter
+    def username(self, username):
+        if len(username) >= 3:
+            self.__username = username
+        else:
+            print("username too short")
+yossi = UserProfile("yossi")
+yossi.username = "yo"
+print(yossi.__dict__)
+yossi.username = "yosss"
+print(yossi.__dict__)
+# step 4 - Private Follower Count
+class UserProfile:
+    def __init__(self, username):
+        self.username = username
+        self.__followers = 0
+    @property
+    def followers(self):
+        return self.__followers
+    def follow(self):
+        self.__followers += 1
+    def unfollow(self):
+        self.__followers -= 1
+yossi = UserProfile("yossi")
+yossi.follow()
+yossi.follow()
+yossi.follow()
+yossi.unfollow()
+print(yossi.followers)
+# step 5 - Protected Bio Field
+class UserProfile:
+    def __init__(self, username, bio):
+        self.username = username
+        self._bio = bio
+    @property
+    def bio(self):
+        return self._bio
+class VerifiedUser(UserProfile):
+    def __init__(self, username, bio, badge):
+        super().__init__(username, bio)
+        self.badge = badge
+    def full_description(self):
+        print(f"{self.username} [{self.badge}]: {self._bio}")
+celeb = VerifiedUser("celeb", "Singer and songwriter", "✓")
+celeb.full_description()
+# step 6 - Age Setter with Range Check
+class UserProfile:
+    def __init__(self, username, age):
+        self.username = username
+        self.__age = age
+    @property
+    def age(self):
+        return self.__age
+    @age.setter
+    def age(self, age):
+        if 13 <= age <= 120:
+            self.__age = age
+        else:
+            print("Invalid age.")
+dan = UserProfile("dan", 18)
+print(dan.__dict__)
+dan.age = 10
+dan.age = 200
+dan.age = 25
+print(dan.__dict__)
+# step 7 - Password Protection
+class UserAccount:
+    def __init__(self, username, password):
+        self.username = username
+        self.__password = password
+    def check_password(self, attempt):
+        return True if attempt == self.__password else False
+    def change_password(self, old, new):
+        if self.__password == old:
+            self.__password = new
+        else:
+            print("Incorrect old password.")
+admin = UserAccount("admin", "secret")
+print(admin.check_password("wrong"))
+admin.change_password("secre", "new123")
+# step 8 - Post Like Counter
+class Post:
+    def __init__(self, author, content):
+        self.author = author
+        self.content = content
+        self.__likes = 0
+        self.__liked_by = []
+    @property
+    def likes(self):
+        return self.__likes
+    def like(self, username):
+        if not username in self.__liked_by:
+            self.__liked_by.append(username)
+            self.__likes += 1
+    def unlike(self, username):
+        if username in self.__liked_by:
+            self.__liked_by.remove(username)
+            self.__likes -= 1
+    def status(self):
+        print(f"Post by {self.author}: {self.__likes} likes")
+alice  = Post("alice", "Hello world!")
+alice.like("yossi")
+alice.like("mosh")
+alice.like("yani")
+alice.like("yani")
+alice.unlike("yani")
+alice.status()
+# step 9 - Profile Privacy Settings
+class UserProfile:
+    def __init__(self, username):
+        self.username = username
+        self.__is_public = True
+        self.__show_email = False
+        self.__show_age = False
+    
+    @property
+    def is_public(self):
+        return self.__is_public
+    @is_public.setter
+    def is_public(self, field):
+        if field == True or field == False:
+            self.__is_public = field
+        else:
+            print(f"{field} must be True or False")
+    @property
+    def show_email(self):
+        return self.__show_email
+    @show_email.setter
+    def show_email(self, field):
+        if field == True or field == False:
+            self.__show_email = field
+        else:
+            print(f"{field} must be True or False")
+    @property
+    def show_age(self):
+        return self.__show_age
+    @show_age.setter
+    def show_age(self, field):
+        if field == True or field == False:
+            self.__show_age = field
+        else:
+            print(f"{field} must be True or False")
+    def privacy_summary(self):
+        print(f"settings: {self.username} , is public: {self.__is_public}, show email: {self.__show_email}, show age: {self.__show_age}")
+yossi = UserProfile("yossi")
+yossi.show_email = True
+yossi.is_public = "yes"
+yossi.privacy_summary()
+# step 10 - Full User Account System
+class UserAccount:
+    def __init__(self, username, email, password, age):
+        self.__username = username
+        self.__email = email
+        self.__password = password
+        self.__age = age
+        self._login_count = 0
+    @property
+    def username(self):
+        return self.__username
+    @username.setter
+    def username(self, new_user):
+        if new_user >= 3:
+            self.__username = new_user
+
+    @property
+    def email(self):
+        return self.__email
+    @email.setter
+    def email(self, new_email):
+        if "@" in new_email:
+            self.__email = new_email
+    @property
+    def age(self):
+        return self.__age
+    @age.setter
+    def age(self, new_age):
+        if 13 <= new_age <= 120:
+            self.__age = new_age
+    def check_password(self, attempt):
+        return True if attempt == self.__password else False
+    def change_password(self, old, new):
+        if self.__password == old:
+            self.__password = new
+        else:
+            print("Incorrect old password.")
+    def login(self, password):
+        if password == self.__password:
+            self._login_count += 1
+        else:
+            print("Login failed.")
+    def account_summary(self):
+        print(f"username: {self.__username}, email: {self.__email}, age: {self.__age}, login count: {self._login_count}")
+yossi = UserAccount("yossi", "yossi@gmail.com", 45485, 22)
+yossi.login(546)
+yossi.login(54665431)
+yossi.login(45485)
+yossi.email = "yossi@gg"
+yossi.age = 30
+yossi.account_summary()
