@@ -138,3 +138,44 @@ alice.like("yani")
 alice.like("yani")
 alice.unlike("yani")
 alice.status()
+# step 9 - Profile Privacy Settings
+class UserProfile:
+    def __init__(self, username):
+        self.username = username
+        self.__is_public = True
+        self.__show_email = False
+        self.__show_age = False
+    
+    @property
+    def is_public(self):
+        return self.__is_public
+    @is_public.setter
+    def is_public(self, field):
+        if field == True or field == False:
+            self.__is_public = field
+        else:
+            print(f"{field} must be True or False")
+    @property
+    def show_email(self):
+        return self.__show_email
+    @show_email.setter
+    def show_email(self, field):
+        if field == True or field == False:
+            self.__show_email = field
+        else:
+            print(f"{field} must be True or False")
+    @property
+    def show_age(self):
+        return self.__show_age
+    @show_age.setter
+    def show_age(self, field):
+        if field == True or field == False:
+            self.__show_age = field
+        else:
+            print(f"{field} must be True or False")
+    def privacy_summary(self):
+        print(f"settings: {self.username} , is public: {self.__is_public}, show email: {self.__show_email}, show age: {self.__show_age}")
+yossi = UserProfile("yossi")
+yossi.show_email = True
+yossi.is_public = "yes"
+yossi.privacy_summary()
